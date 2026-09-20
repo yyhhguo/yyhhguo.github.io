@@ -1,0 +1,698 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>数据结构 · 笔试必考「数量关系」结论与推导 | 云端漫步</title><meta name="author" content="杨浩"><meta name="copyright" content="杨浩"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这不是概念讲解，全部是选择题&#x2F;填空题直接套用的数字结论。每条都带推导，能记住推导就能现场算出来，不靠死背。已用代码逐一验证，结论可靠。   目录 树：结点 &#x2F; 边 &#x2F; 叶子 &#x2F; 度数 二叉树：层 &#x2F; 深度 &#x2F; 完全二叉树 &#x2F; 满二叉树 二叉链表空指针域 &#x2F; 线索二叉树 AVL 最少结点（斐波那契） 哈夫曼树 卡特兰数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构 · 笔试必考「数量关系」结论与推导">
+<meta property="og:url" content="https://www.yhblog.xyz/2026/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%C2%B7-%E7%AC%94%E8%AF%95%E5%BF%85%E8%80%83%E3%80%8C%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E3%80%8D%E7%BB%93%E8%AE%BA%E4%B8%8E%E6%8E%A8%E5%AF%BC/index.html">
+<meta property="og:site_name" content="云端漫步">
+<meta property="og:description" content="这不是概念讲解，全部是选择题&#x2F;填空题直接套用的数字结论。每条都带推导，能记住推导就能现场算出来，不靠死背。已用代码逐一验证，结论可靠。   目录 树：结点 &#x2F; 边 &#x2F; 叶子 &#x2F; 度数 二叉树：层 &#x2F; 深度 &#x2F; 完全二叉树 &#x2F; 满二叉树 二叉链表空指针域 &#x2F; 线索二叉树 AVL 最少结点（斐波那契） 哈夫曼树 卡特兰数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.yhblog.xyz/img/cover/16683502390332800.jpg">
+<meta property="article:published_time" content="2026-08-22T09:33:59.000Z">
+<meta property="article:modified_time" content="2026-09-20T07:13:17.592Z">
+<meta property="article:author" content="杨浩">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.yhblog.xyz/img/cover/16683502390332800.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.yhblog.xyz/2026/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%C2%B7-%E7%AC%94%E8%AF%95%E5%BF%85%E8%80%83%E3%80%8C%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E3%80%8D%E7%BB%93%E8%AE%BA%E4%B8%8E%E6%8E%A8%E5%AF%BC/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构 · 笔试必考「数量关系」结论与推导',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-09-20 15:13:17'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.2.0"><link rel="alternate" href="/rss2.xml" title="云端漫步" type="application/rss+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load',() => { preloader.endLoading() })
+
+  if (false) {
+    document.addEventListener('pjax:send', () => { preloader.initLoading() })
+    document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+  }
+})()</script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/cover/16683502390332800.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="云端漫步"><span class="site-name">云端漫步</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据结构 · 笔试必考「数量关系」结论与推导</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-08-22T09:33:59.000Z" title="发表于 2026-08-22 17:33:59">2026-08-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-09-20T07:13:17.592Z" title="更新于 2026-09-20 15:13:17">2026-09-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据结构 · 笔试必考「数量关系」结论与推导"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>这不是概念讲解，全部是<strong>选择题&#x2F;填空题直接套用的数字结论</strong>。<br>每条都带推导，能记住推导就能现场算出来，不靠死背。<br>已用代码逐一验证，结论可靠。</p>
+</blockquote>
+<hr>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#%E4%B8%80%E6%A0%91%E7%BB%93%E7%82%B9--%E8%BE%B9--%E5%8F%B6%E5%AD%90--%E5%BA%A6%E6%95%B0">树：结点 &#x2F; 边 &#x2F; 叶子 &#x2F; 度数</a></li>
+<li><a href="#%E4%BA%8C%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%82--%E6%B7%B1%E5%BA%A6--%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91--%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91">二叉树：层 &#x2F; 深度 &#x2F; 完全二叉树 &#x2F; 满二叉树</a></li>
+<li><a href="#%E4%B8%89%E4%BA%8C%E5%8F%89%E9%93%BE%E8%A1%A8%E7%A9%BA%E6%8C%87%E9%92%88%E5%9F%9F--%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91">二叉链表空指针域 &#x2F; 线索二叉树</a></li>
+<li><a href="#%E5%9B%9Bavl-%E6%9C%80%E5%B0%91%E7%BB%93%E7%82%B9%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91">AVL 最少结点（斐波那契）</a></li>
+<li><a href="#%E4%BA%94%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91">哈夫曼树</a></li>
+<li><a href="#%E5%85%AD%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%E5%BD%A2%E6%80%81%E6%95%B0--%E5%87%BA%E6%A0%88%E5%BA%8F%E5%88%97--%E6%8B%AC%E5%8F%B7">卡特兰数（形态数 &#x2F; 出栈序列 &#x2F; 括号）</a></li>
+<li><a href="#%E4%B8%83%E6%A0%91%E4%B8%8E%E6%A3%AE%E6%9E%97%E8%BD%AC%E6%8D%A2">树与森林转换</a></li>
+<li><a href="#%E5%85%AB%E5%9B%BE%E8%BE%B9%E6%95%B0--%E5%BA%A6%E6%95%B0--%E8%BF%9E%E9%80%9A%E6%80%A7--%E7%94%9F%E6%88%90%E6%A0%91">图：边数 &#x2F; 度数 &#x2F; 连通性 &#x2F; 生成树</a></li>
+<li><a href="#%E4%B9%9D%E7%BA%BF%E6%80%A7%E8%A1%A8%E5%B9%B3%E5%9D%87%E7%A7%BB%E5%8A%A8--%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0">线性表：平均移动 &#x2F; 比较次数</a></li>
+<li><a href="#%E5%8D%81%E6%9F%A5%E6%89%BE%E9%A1%BA%E5%BA%8F--%E6%8A%98%E5%8D%8A--%E5%93%88%E5%B8%8C%E8%A3%85%E5%A1%AB%E5%9B%A0%E5%AD%90">查找：顺序 &#x2F; 折半 &#x2F; 哈希装填因子</a></li>
+<li><a href="#%E5%8D%81%E4%B8%80%E6%A0%88--%E9%98%9F%E5%88%97--%E4%B8%B2--%E5%B9%BF%E4%B9%89%E8%A1%A8">栈 &#x2F; 队列 &#x2F; 串 &#x2F; 广义表</a></li>
+<li><a href="#%E5%8D%81%E4%BA%8C%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97">矩阵压缩存储地址计算</a></li>
+<li><a href="#%E5%8D%81%E4%B8%89%E6%8E%92%E5%BA%8F%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0%E4%B8%8B%E7%95%8C--%E8%B6%9F%E6%95%B0">排序：比较次数下界 &#x2F; 趟数</a></li>
+<li><a href="#%E5%8D%81%E5%9B%9B%E9%80%92%E6%8E%A8%E5%85%AC%E5%BC%8F%E9%80%9F%E8%AE%B0%E6%B1%89%E8%AF%BA%E5%A1%94--%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91">递推公式速记（汉诺塔 &#x2F; 斐波那契）</a></li>
+<li><a href="#%E5%8D%81%E4%BA%94%E6%98%93%E6%B7%B7%E6%98%93%E9%94%99%E5%AF%B9%E7%85%A7%E8%A1%A8">易混易错对照表</a></li>
+</ol>
+<hr>
+<h2 id="一、树：结点-边-叶子-度数"><a href="#一、树：结点-边-叶子-度数" class="headerlink" title="一、树：结点 &#x2F; 边 &#x2F; 叶子 &#x2F; 度数"></a>一、树：结点 &#x2F; 边 &#x2F; 叶子 &#x2F; 度数</h2><h3 id="结论-1：n-个结点的树有-n−1-条边"><a href="#结论-1：n-个结点的树有-n−1-条边" class="headerlink" title="结论 1：n 个结点的树有 n−1 条边"></a>结论 1：n 个结点的树有 <strong>n−1</strong> 条边</h3><p><strong>推导</strong>：除根结点外，每个结点有且仅有 1 条「父边」指向它。n 个结点中只有根没有父边 → 边数 &#x3D; n−1。</p>
+<h3 id="结论-2（最核心）：任何二叉树-n₀-n₂-1（叶子数-度为2的结点数-1）"><a href="#结论-2（最核心）：任何二叉树-n₀-n₂-1（叶子数-度为2的结点数-1）" class="headerlink" title="结论 2（最核心）：任何二叉树 n₀ &#x3D; n₂ + 1（叶子数 &#x3D; 度为2的结点数 + 1）"></a>结论 2（最核心）：任何二叉树 <strong>n₀ &#x3D; n₂ + 1</strong>（叶子数 &#x3D; 度为2的结点数 + 1）</h3><p><strong>推导</strong>（两步）：</p>
+<ul>
+<li>设度为 0&#x2F;1&#x2F;2 的结点数分别为 n₀、n₁、n₂，总结点数 <code>N = n₀ + n₁ + n₂</code></li>
+<li>「度」按孩子数算，所有结点的度之和 &#x3D; 边数 &#x3D; N−1，即 <code>n₁ + 2n₂ = n₀ + n₁ + n₂ − 1</code></li>
+<li>消去 n₁：<code>n₂ = n₀ − 1</code> → <strong>n₀ &#x3D; n₂ + 1</strong> ✔</li>
+</ul>
+<h3 id="结论-3（推广到-m-叉树）：n₀-1-Σ-j−1-·nⱼ（j-≥-2）"><a href="#结论-3（推广到-m-叉树）：n₀-1-Σ-j−1-·nⱼ（j-≥-2）" class="headerlink" title="结论 3（推广到 m 叉树）：n₀ &#x3D; 1 + Σ(j−1)·nⱼ（j ≥ 2）"></a>结论 3（推广到 m 叉树）：<strong>n₀ &#x3D; 1 + Σ(j−1)·nⱼ</strong>（j ≥ 2）</h3><p><strong>推导</strong>：同结论 2，<code>Σ j·nⱼ = N − 1</code>，代入 <code>N = Σ nⱼ</code> 得 <code>n₀ = 1 + n₂ + 2n₃ + 3n₄ + …</code>。</p>
+<ul>
+<li>特例：满 k 叉树（所有分支结点度为 k），内部结点数 **n_内 &#x3D; (n₀−1)&#x2F;(k−1)**，总结点数 **(k·n₀−1)&#x2F;(k−1)**。</li>
+</ul>
+<h3 id="结论-4：已知各度结点数求叶子-总结点"><a href="#结论-4：已知各度结点数求叶子-总结点" class="headerlink" title="结论 4：已知各度结点数求叶子&#x2F;总结点"></a>结论 4：已知各度结点数求叶子&#x2F;总结点</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">边数 E = N − 1 且 Σ(度×个数) = 2E   ← 本质是图的握手定理</span><br></pre></td></tr></table></figure>
+<p>例：二叉树中度 1 的结点 3 个、度 2 的结点 5 个 → 叶子 &#x3D; 5+1 &#x3D; 6，总结点 &#x3D; 3+5+6 &#x3D; 14。</p>
+<h3 id="结论-5：森林有-t-棵树、n-个结点，则边数-n-−-t"><a href="#结论-5：森林有-t-棵树、n-个结点，则边数-n-−-t" class="headerlink" title="结论 5：森林有 t 棵树、n 个结点，则边数 &#x3D; n − t"></a>结论 5：森林有 t 棵树、n 个结点，则边数 &#x3D; <strong>n − t</strong></h3><p><strong>推导</strong>：每棵树 nᵢ 个结点有 nᵢ−1 条边，求和 <code>Σ(nᵢ−1) = n − t</code>。</p>
+<hr>
+<h2 id="二、二叉树：层-深度-完全二叉树-满二叉树"><a href="#二、二叉树：层-深度-完全二叉树-满二叉树" class="headerlink" title="二、二叉树：层 &#x2F; 深度 &#x2F; 完全二叉树 &#x2F; 满二叉树"></a>二、二叉树：层 &#x2F; 深度 &#x2F; 完全二叉树 &#x2F; 满二叉树</h2><h3 id="结论-1：第-i-层最多-2-i−1-个结点"><a href="#结论-1：第-i-层最多-2-i−1-个结点" class="headerlink" title="结论 1：第 i 层最多 2^(i−1) 个结点"></a>结论 1：第 i 层最多 <strong>2^(i−1)</strong> 个结点</h3><p>等比数列，第一层 1 个，每层翻倍。</p>
+<h3 id="结论-2：深度为-k-的二叉树最多-2-k-−-1-个结点"><a href="#结论-2：深度为-k-的二叉树最多-2-k-−-1-个结点" class="headerlink" title="结论 2：深度为 k 的二叉树最多 2^k − 1 个结点"></a>结论 2：深度为 k 的二叉树最多 <strong>2^k − 1</strong> 个结点</h3><p><code>1+2+4+…+2^(k−1) = 2^k − 1</code>。达到上限即满二叉树。</p>
+<h3 id="结论-3：n-个结点的二叉树"><a href="#结论-3：n-个结点的二叉树" class="headerlink" title="结论 3：n 个结点的二叉树"></a>结论 3：n 个结点的二叉树</h3><ul>
+<li>最少深度（高度）：<strong>⌈log₂(n+1)⌉</strong> &#x3D; ⌊log₂n⌋ + 1（高度最低&#x3D;接近满二叉树）</li>
+<li>最多深度：<strong>n</strong>（退化为单支链）</li>
+<li>反推：高度 h 的二叉树，结点数范围 <code>2^(h−1) ≤ n ≤ 2^h − 1</code></li>
+</ul>
+<h3 id="结论-4：完全二叉树（必考）"><a href="#结论-4：完全二叉树（必考）" class="headerlink" title="结论 4：完全二叉树（必考）"></a>结论 4：完全二叉树（必考）</h3><p>设 n 个结点（下标从 1 编号）：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>深度</td>
+<td><strong>⌊log₂n⌋ + 1</strong></td>
+</tr>
+<tr>
+<td>叶子结点数 n₀</td>
+<td><strong>⌈n&#x2F;2⌉</strong></td>
+</tr>
+<tr>
+<td>度为 1 的结点数 n₁</td>
+<td>n 为偶 → <strong>1</strong>；n 为奇 → <strong>0</strong></td>
+</tr>
+<tr>
+<td>最后一个非叶结点编号</td>
+<td><strong>⌊n&#x2F;2⌋</strong></td>
+</tr>
+<tr>
+<td>叶子编号范围</td>
+<td>⌊n&#x2F;2⌋ + 1 ～ n</td>
+</tr>
+<tr>
+<td>结点 i 的父 &#x2F; 左 &#x2F; 右</td>
+<td>⌊i&#x2F;2⌋ &#x2F; 2i &#x2F; 2i+1</td>
+</tr>
+<tr>
+<td>i 有左孩子 ⟺</td>
+<td>2i ≤ n</td>
+</tr>
+<tr>
+<td>i 有右孩子 ⟺</td>
+<td>2i+1 ≤ n</td>
+</tr>
+</tbody></table>
+<p><strong>n₁ 的推导</strong>：n₀ &#x3D; ⌈n&#x2F;2⌉，n₂ &#x3D; n₀−1，故 n₁ &#x3D; n − n₀ − n₂ &#x3D; n − 2⌈n&#x2F;2⌉ + 1。</p>
+<ul>
+<li>n 偶 (2m)：n₁ &#x3D; 2m − 2m + 1 &#x3D; <strong>1</strong></li>
+<li>n 奇 (2m+1)：n₁ &#x3D; 2m+1 − 2(m+1) + 1 &#x3D; <strong>0</strong></li>
+</ul>
+<h3 id="结论-5：满二叉树（深度-k）"><a href="#结论-5：满二叉树（深度-k）" class="headerlink" title="结论 5：满二叉树（深度 k）"></a>结论 5：满二叉树（深度 k）</h3><ul>
+<li>结点总数 <strong>2^k − 1</strong>，叶子 **2^(k−1)**，分支结点 <strong>2^(k−1) − 1</strong></li>
+<li>叶子数 &#x3D; 分支结点数 + 1</li>
+</ul>
+<h3 id="结论-6：二叉树-n-个结点，恰好只有-n−1-条边（所有树通用），不可能是-n-条"><a href="#结论-6：二叉树-n-个结点，恰好只有-n−1-条边（所有树通用），不可能是-n-条" class="headerlink" title="结论 6：二叉树 n 个结点，恰好只有 n−1 条边（所有树通用），不可能是 n 条"></a>结论 6：二叉树 n 个结点，恰好只有 n−1 条边（所有树通用），不可能是 n 条</h3><h3 id="易混点：二叉树的「度」-孩子数（≤2）；普通树的「度」-孩子数；图论里「度」-邻接边数（含父边）。不同上下文别混用。"><a href="#易混点：二叉树的「度」-孩子数（≤2）；普通树的「度」-孩子数；图论里「度」-邻接边数（含父边）。不同上下文别混用。" class="headerlink" title="易混点：二叉树的「度」&#x3D; 孩子数（≤2）；普通树的「度」&#x3D; 孩子数；图论里「度」&#x3D; 邻接边数（含父边）。不同上下文别混用。"></a>易混点：二叉树的「度」&#x3D; 孩子数（≤2）；普通树的「度」&#x3D; 孩子数；图论里「度」&#x3D; 邻接边数（含父边）。<strong>不同上下文别混用。</strong></h3><hr>
+<h2 id="三、二叉链表空指针域-线索二叉树"><a href="#三、二叉链表空指针域-线索二叉树" class="headerlink" title="三、二叉链表空指针域 &#x2F; 线索二叉树"></a>三、二叉链表空指针域 &#x2F; 线索二叉树</h2><h3 id="结论：n-个结点的二叉链表有-n-1-个空指针域"><a href="#结论：n-个结点的二叉链表有-n-1-个空指针域" class="headerlink" title="结论：n 个结点的二叉链表有 n+1 个空指针域"></a>结论：n 个结点的二叉链表有 <strong>n+1</strong> 个空指针域</h3><p><strong>推导</strong>：每个结点 2 个指针域，共 2n 个；n−1 条边用掉 n−1 个（每条边&#x3D;一个孩子指针），空域 &#x3D; 2n − (n−1) &#x3D; <strong>n+1</strong>。</p>
+<blockquote>
+<p>线索二叉树就是利用这 n+1 个空域存前驱&#x2F;后继 → 线索数 &#x3D; n+1。</p>
+</blockquote>
+<h3 id="推广：三叉链表（lchild-rchild-parent）"><a href="#推广：三叉链表（lchild-rchild-parent）" class="headerlink" title="推广：三叉链表（lchild + rchild + parent）"></a>推广：三叉链表（lchild + rchild + parent）</h3><p>每条边占 2 个指针（一个孩子指针 + 一个父指针），用掉 2(n−1) 个，共 3n 个域 → 空域 &#x3D; 3n − 2(n−1) &#x3D; <strong>n+2</strong>。</p>
+<hr>
+<h2 id="四、AVL-最少结点（斐波那契）"><a href="#四、AVL-最少结点（斐波那契）" class="headerlink" title="四、AVL 最少结点（斐波那契）"></a>四、AVL 最少结点（斐波那契）</h2><h3 id="结论：高度为-h-的-AVL-树最少结点数满足"><a href="#结论：高度为-h-的-AVL-树最少结点数满足" class="headerlink" title="结论：高度为 h 的 AVL 树最少结点数满足"></a>结论：高度为 h 的 AVL 树最少结点数满足</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">N(h) = N(h−1) + N(h−2) + 1,   N(0)=0, N(1)=1</span><br><span class="line">即   N(h) = Fib(h+2) − 1</span><br></pre></td></tr></table></figure>
+<p><strong>数值速查</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>高度 h</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最少结点</td>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>7</td>
+<td>12</td>
+<td>20</td>
+<td>33</td>
+</tr>
+</tbody></table>
+<p><strong>推导</strong>：AVL 树左右子树高度差 ≤ 1，要结点最少，就让左子树高度 h−1、右子树高度 h−2（差 1），再加根结点 → 递推式。解斐波那契即得。</p>
+<p><strong>反用</strong>：含 n 个结点的 AVL 树最大高度 ≈ 1.44·log₂(n+1)（最坏也 O(log n)）。</p>
+<hr>
+<h2 id="五、哈夫曼树"><a href="#五、哈夫曼树" class="headerlink" title="五、哈夫曼树"></a>五、哈夫曼树</h2><h3 id="结论：n-个叶子（权值）的哈夫曼树有-2n−1-个结点"><a href="#结论：n-个叶子（权值）的哈夫曼树有-2n−1-个结点" class="headerlink" title="结论：n 个叶子（权值）的哈夫曼树有 2n−1 个结点"></a>结论：n 个叶子（权值）的哈夫曼树有 <strong>2n−1</strong> 个结点</h3><p><strong>推导</strong>：每次合并两个结点生成一个新内部结点，合并 n−1 次 → 新增 n−1 个内部结点，总 &#x3D; n + (n−1) &#x3D; <strong>2n−1</strong>。</p>
+<h3 id="其他性质"><a href="#其他性质" class="headerlink" title="其他性质"></a>其他性质</h3><ul>
+<li>哈夫曼树<strong>没有度为 1 的结点</strong>（n₁ &#x3D; 0）→ n₀ &#x3D; n₂ + 1 恒成立</li>
+<li>权值越小的结点离根越远（编码越长）</li>
+<li>哈夫曼编码是<strong>前缀编码</strong>（任一编码不是另一编码的前缀）</li>
+<li>WPL &#x3D; Σ(权 × 路径长度) 最小；权值互异时 WPL 唯一</li>
+</ul>
+<hr>
+<h2 id="六、卡特兰数（形态数-出栈序列-括号）"><a href="#六、卡特兰数（形态数-出栈序列-括号）" class="headerlink" title="六、卡特兰数（形态数 &#x2F; 出栈序列 &#x2F; 括号）"></a>六、卡特兰数（形态数 &#x2F; 出栈序列 &#x2F; 括号）</h2><h3 id="公式：Cₙ-C-2n-n-n-1"><a href="#公式：Cₙ-C-2n-n-n-1" class="headerlink" title="公式：Cₙ &#x3D; C(2n, n) &#x2F; (n+1)"></a>公式：<strong>Cₙ &#x3D; C(2n, n) &#x2F; (n+1)</strong></h3><p><strong>数值速查</strong>：1, 1, 2, 5, 14, 42, 132, 429, 1430…</p>
+<h3 id="四大应用（考到就是这几种）"><a href="#四大应用（考到就是这几种）" class="headerlink" title="四大应用（考到就是这几种）"></a>四大应用（考到就是这几种）</h3><ol>
+<li>n 个结点的二叉树<strong>形态数</strong></li>
+<li>n 个元素进栈，<strong>可能的出栈序列数</strong></li>
+<li>n 对括号的<strong>合法匹配数</strong></li>
+<li>凸 n+2 边形三角剖分数（即 Cₙ）</li>
+</ol>
+<p><strong>记忆推导</strong>：把二叉树的左右子树递归拆分，<code>Tₙ = Σ Tₖ·Tₙ₋₁₋ₖ</code>，解出封闭式 <code>C(2n,n)/(n+1)</code>。</p>
+<blockquote>
+<p>例：3 个结点二叉树形态 &#x3D; C₃ &#x3D; 5（✓ 符合常识）。</p>
+</blockquote>
+<hr>
+<h2 id="七、树与森林转换"><a href="#七、树与森林转换" class="headerlink" title="七、树与森林转换"></a>七、树与森林转换</h2><table>
+<thead>
+<tr>
+<th>转换</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>树 → 二叉树</td>
+<td>结点数不变；<strong>根结点的右子树必为空</strong>（根没有兄弟）</td>
+</tr>
+<tr>
+<td>森林 t 棵树 → 二叉树</td>
+<td>结点数不变；二叉树的根即第一棵树的根</td>
+</tr>
+<tr>
+<td>森林边数</td>
+<td>n − t（见第一节结论 5）</td>
+</tr>
+<tr>
+<td>还原判定</td>
+<td>二叉树根无右孩子 ⟹ 对应<strong>一棵树</strong>；根有右孩子 ⟹ 对应森林</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="八、图：边数-度数-连通性-生成树"><a href="#八、图：边数-度数-连通性-生成树" class="headerlink" title="八、图：边数 &#x2F; 度数 &#x2F; 连通性 &#x2F; 生成树"></a>八、图：边数 &#x2F; 度数 &#x2F; 连通性 &#x2F; 生成树</h2><h3 id="结论-1：握手定理"><a href="#结论-1：握手定理" class="headerlink" title="结论 1：握手定理"></a>结论 1：握手定理</h3><ul>
+<li>无向图：<strong>Σ(顶点度) &#x3D; 2E</strong>，故度之和必为偶数 → <strong>奇度顶点个数必为偶数</strong></li>
+<li>有向图：<strong>Σ入度 &#x3D; Σ出度 &#x3D; E</strong></li>
+</ul>
+<h3 id="结论-2：完全图边数（必考）"><a href="#结论-2：完全图边数（必考）" class="headerlink" title="结论 2：完全图边数（必考）"></a>结论 2：完全图边数（必考）</h3><table>
+<thead>
+<tr>
+<th>图</th>
+<th>边数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>无向完全图 Kₙ</td>
+<td><strong>n(n−1)&#x2F;2</strong></td>
+</tr>
+<tr>
+<td>有向完全图（每对顶点两条有向边）</td>
+<td><strong>n(n−1)</strong></td>
+</tr>
+<tr>
+<td>完全二分图 K(a,b)</td>
+<td><strong>a·b</strong></td>
+</tr>
+</tbody></table>
+<p><strong>推导</strong>：Kₙ 每两点连一条边 &#x3D; 从 n 个点取 2 个组合数 C(n,2) &#x3D; n(n−1)&#x2F;2。</p>
+<h3 id="结论-3：连通性最少边数（高频易混，务必分清）"><a href="#结论-3：连通性最少边数（高频易混，务必分清）" class="headerlink" title="结论 3：连通性最少边数（高频易混，务必分清）"></a>结论 3：连通性最少边数（高频易混，务必分清）</h3><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>最少边数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n 顶点无向图<strong>恰好连通</strong>（构造出来连通）</td>
+<td><strong>n−1</strong></td>
+</tr>
+<tr>
+<td>n 顶点有向图<strong>恰好强连通</strong></td>
+<td><strong>n</strong>（构成一个大环，每点入&#x3D;出&#x3D;1）</td>
+</tr>
+<tr>
+<td>n 顶点无向图<strong>保证无论怎么连都连通</strong></td>
+<td><strong>C(n−1,2) + 1</strong></td>
+</tr>
+<tr>
+<td>n 顶点有向图（忽略方向）弱连通</td>
+<td>n−1</td>
+</tr>
+</tbody></table>
+<p><strong>「保证连通」推导</strong>：最坏情况是 n−1 个顶点先构成完全图（C(n−1,2) 条边）把第 n 个顶点孤立，再加 1 条边连它 → 任何连线方式下都必然连通。</p>
+<blockquote>
+<p>例：n&#x3D;5 → 4 个顶点完全图 6 条 + 1 &#x3D; 7 条（✓ 已验证）。</p>
+</blockquote>
+<h3 id="结论-4：生成树"><a href="#结论-4：生成树" class="headerlink" title="结论 4：生成树"></a>结论 4：生成树</h3><ul>
+<li>连通图 n 顶点 m 条边 → 生成树恰有 <strong>n−1</strong> 条边</li>
+<li>完全图 Kₙ 的生成树个数 &#x3D; **n^(n−2)**（Cayley 公式）<blockquote>
+<p>K₃ → 3 棵，K₄ → 16 棵</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="结论-5：平面图（欧拉公式）"><a href="#结论-5：平面图（欧拉公式）" class="headerlink" title="结论 5：平面图（欧拉公式）"></a>结论 5：平面图（欧拉公式）</h3><ul>
+<li>连通平面图：<strong>V − E + F &#x3D; 2</strong>（F 为面数）</li>
+<li>简单平面图必有 E ≤ 3V − 6；无三角形则 E ≤ 2V − 4</li>
+<li>推论：K₅、K₃,₃ 都是非平面图</li>
+</ul>
+<h3 id="结论-6：欧拉图"><a href="#结论-6：欧拉图" class="headerlink" title="结论 6：欧拉图"></a>结论 6：欧拉图</h3><ul>
+<li>存在欧拉回路 ⟺ 连通且<strong>所有顶点度为偶</strong></li>
+<li>存在欧拉通路（不回起点）⟺ 连通且恰有 <strong>0 或 2 个</strong>奇度顶点</li>
+<li>有向欧拉回路 ⟺ 入度 &#x3D; 出度（且连通）</li>
+</ul>
+<h3 id="结论-7：二分图-⟺-无奇环-⟺-2-可着色"><a href="#结论-7：二分图-⟺-无奇环-⟺-2-可着色" class="headerlink" title="结论 7：二分图 ⟺ 无奇环 ⟺ 2-可着色"></a>结论 7：二分图 ⟺ 无奇环 ⟺ 2-可着色</h3><h3 id="结论-8：拓扑排序成功-⟺-无环（DAG）；序列唯一-⟺-每步入度为-0-的顶点恰一个"><a href="#结论-8：拓扑排序成功-⟺-无环（DAG）；序列唯一-⟺-每步入度为-0-的顶点恰一个" class="headerlink" title="结论 8：拓扑排序成功 ⟺ 无环（DAG）；序列唯一 ⟺ 每步入度为 0 的顶点恰一个"></a>结论 8：拓扑排序成功 ⟺ 无环（DAG）；序列唯一 ⟺ 每步入度为 0 的顶点恰一个</h3><hr>
+<h2 id="九、线性表：平均移动-比较次数"><a href="#九、线性表：平均移动-比较次数" class="headerlink" title="九、线性表：平均移动 &#x2F; 比较次数"></a>九、线性表：平均移动 &#x2F; 比较次数</h2><h3 id="结论-1：顺序表插入-删除平均移动次数（高频！）"><a href="#结论-1：顺序表插入-删除平均移动次数（高频！）" class="headerlink" title="结论 1：顺序表插入&#x2F;删除平均移动次数（高频！）"></a>结论 1：顺序表插入&#x2F;删除平均移动次数（高频！）</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>平均移动次数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>在长度为 n 的顺序表<strong>插入</strong>（n+1 个位置）</td>
+<td><strong>n&#x2F;2</strong></td>
+</tr>
+<tr>
+<td><strong>删除</strong>（n 个位置）</td>
+<td><strong>(n−1)&#x2F;2</strong></td>
+</tr>
+<tr>
+<td>无序查找（比较次数）</td>
+<td><strong>(n+1)&#x2F;2</strong></td>
+</tr>
+</tbody></table>
+<p><strong>插入推导</strong>：在第 i 个位置插入需移动 n−i+1 个，<code>平均 = Σ(n−i+1)/(n+1) = [n+(n−1)+…+0]/(n+1) = n(n+1)/2 ÷ (n+1) = n/2</code>。<br><strong>删除推导</strong>：<code>平均 = Σ(n−i)/n = (n−1)/2</code>。</p>
+<h3 id="结论-2：链表插入-删除"><a href="#结论-2：链表插入-删除" class="headerlink" title="结论 2：链表插入&#x2F;删除"></a>结论 2：链表插入&#x2F;删除</h3><ul>
+<li>已知位置指针 → O(1)；已知值 → 需先 O(n) 查找，总体 O(n)。</li>
+<li>无头结点 vs 有头结点：头插&#x2F;头删在有头结点时统一逻辑。</li>
+</ul>
+<hr>
+<h2 id="十、查找：顺序-折半-哈希装填因子"><a href="#十、查找：顺序-折半-哈希装填因子" class="headerlink" title="十、查找：顺序 &#x2F; 折半 &#x2F; 哈希装填因子"></a>十、查找：顺序 &#x2F; 折半 &#x2F; 哈希装填因子</h2><h3 id="结论-1：顺序查找"><a href="#结论-1：顺序查找" class="headerlink" title="结论 1：顺序查找"></a>结论 1：顺序查找</h3><ul>
+<li>成功 ASL &#x3D; <strong>(n+1)&#x2F;2</strong>；失败 ASL &#x3D; n+1（比较到末尾再+哨兵）</li>
+</ul>
+<h3 id="结论-2：折半查找（基于有序数组）"><a href="#结论-2：折半查找（基于有序数组）" class="headerlink" title="结论 2：折半查找（基于有序数组）"></a>结论 2：折半查找（基于有序数组）</h3><ul>
+<li>最多比较 <strong>⌊log₂n⌋ + 1</strong> 次（判定树高度）</li>
+<li>成功 ASL ≈ <strong>log₂(n+1) − 1</strong>（n &#x3D; 2^k − 1 满判定树时精确）</li>
+<li>比较次数与元素值无关，只取决于位置（判定树）。</li>
+</ul>
+<h3 id="结论-3：哈希表"><a href="#结论-3：哈希表" class="headerlink" title="结论 3：哈希表"></a>结论 3：哈希表</h3><ul>
+<li><strong>装填因子 α &#x3D; 表中元素个数 n &#x2F; 表长 m</strong></li>
+<li>线性探测：成功 ASL ≈ (1&#x2F;2)(1 + 1&#x2F;(1−α))；失败 ASL ≈ (1&#x2F;2)(1 + 1&#x2F;(1−α)²)</li>
+<li>链地址法：成功 ASL ≈ 1 + α&#x2F;2</li>
+<li>α 越大冲突越多；α &gt; 0.75 时冲突急剧上升（这也是 HashMap 0.75 的由来）</li>
+</ul>
+<hr>
+<h2 id="十一、栈-队列-串-广义表"><a href="#十一、栈-队列-串-广义表" class="headerlink" title="十一、栈 &#x2F; 队列 &#x2F; 串 &#x2F; 广义表"></a>十一、栈 &#x2F; 队列 &#x2F; 串 &#x2F; 广义表</h2><h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><ul>
+<li>n 个元素进栈，出栈序列数 &#x3D; <strong>卡特兰数 Cₙ</strong>（见第六节）</li>
+<li>例：3 个元素进栈有 C₃ &#x3D; 5 种出栈序列</li>
+</ul>
+<h3 id="队列（循环队列，容量-M，头-front-尾-rear）"><a href="#队列（循环队列，容量-M，头-front-尾-rear）" class="headerlink" title="队列（循环队列，容量 M，头 front 尾 rear）"></a>队列（循环队列，容量 M，头 front 尾 rear）</h3><ul>
+<li><strong>元素个数 &#x3D; (rear − front + M) % M</strong></li>
+<li>判空 front &#x3D;&#x3D; rear；判满 (rear+1) % M &#x3D;&#x3D; front（留一个空位）</li>
+<li>判满推导：不留空位的话 front&#x3D;&#x3D;rear 无法区分空与满（状态数 2^? 表示冲突）</li>
+</ul>
+<h3 id="串"><a href="#串" class="headerlink" title="串"></a>串</h3><ul>
+<li>长度为 n 的串，<strong>子串个数 &#x3D; n(n+1)&#x2F;2 + 1</strong>（含 1 个空串）；非空子串 &#x3D; n(n+1)&#x2F;2</li>
+<li>KMP：O(n+m)；朴素匹配最坏 O(n·m)</li>
+<li>next 数组 &#x3D; 失配时最长公共前后缀长度</li>
+</ul>
+<h3 id="广义表"><a href="#广义表" class="headerlink" title="广义表"></a>广义表</h3><ul>
+<li>长度 &#x3D; 最外层元素个数；深度 &#x3D; 括号最大嵌套层数</li>
+<li>表头 &#x3D; 第一个元素；表尾 &#x3D; 除第一个元素外的<strong>子表</strong></li>
+</ul>
+<hr>
+<h2 id="十二、矩阵压缩存储地址计算（填空必考）"><a href="#十二、矩阵压缩存储地址计算（填空必考）" class="headerlink" title="十二、矩阵压缩存储地址计算（填空必考）"></a>十二、矩阵压缩存储地址计算（填空必考）</h2><h3 id="对称矩阵-A-1-n-1-n-行优先压缩存一维-B"><a href="#对称矩阵-A-1-n-1-n-行优先压缩存一维-B" class="headerlink" title="对称矩阵 A[1..n][1..n] 行优先压缩存一维 B"></a>对称矩阵 A[1..n][1..n] 行优先压缩存一维 B</h3><p>下三角（含对角线）元素总数 &#x3D; <strong>n(n+1)&#x2F;2</strong>。<br><strong>A[i][j]（i ≥ j）存到 B 的 1-based 下标 k &#x3D; i(i−1)&#x2F;2 + j</strong><br><strong>推导</strong>：前 i−1 行共 1+2+…+(i−1) &#x3D; i(i−1)&#x2F;2 个元素，第 i 行第 j 列是第 j 个 → k &#x3D; i(i−1)&#x2F;2 + j。</p>
+<ul>
+<li>若 k 从 0 计：k &#x3D; i(i−1)&#x2F;2 + j − 1</li>
+<li>上三角元素 A[i][j]（i&lt;j）用对称性查 A[j][i]</li>
+</ul>
+<h3 id="三角矩阵"><a href="#三角矩阵" class="headerlink" title="三角矩阵"></a>三角矩阵</h3><ul>
+<li>下三角 + 常数 &#x3D; <strong>n(n+1)&#x2F;2 + 1</strong></li>
+</ul>
+<h3 id="三对角矩阵（带宽-1）"><a href="#三对角矩阵（带宽-1）" class="headerlink" title="三对角矩阵（带宽 1）"></a>三对角矩阵（带宽 1）</h3><ul>
+<li>元素总数 &#x3D; <strong>3n − 2</strong>（第 1、n 行各 2 个，中间 n−2 行各 3 个）</li>
+</ul>
+<h3 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h3><ul>
+<li>三元组表存储：(行, 列, 值)，空间 O(非零元素个数)</li>
+<li>十字链表适合动态修改</li>
+</ul>
+<hr>
+<h2 id="十三、排序：比较次数下界-趟数"><a href="#十三、排序：比较次数下界-趟数" class="headerlink" title="十三、排序：比较次数下界 &#x2F; 趟数"></a>十三、排序：比较次数下界 &#x2F; 趟数</h2><h3 id="结论-1：比较排序下界-Ω-n-log-n"><a href="#结论-1：比较排序下界-Ω-n-log-n" class="headerlink" title="结论 1：比较排序下界 Ω(n log n)"></a>结论 1：比较排序下界 <strong>Ω(n log n)</strong></h3><p><strong>推导</strong>：n 个元素有 n! 种排列，比较排序的决策树是二叉的，区分所有排列至少需要高度 ≥ ⌈log₂(n!)⌉，而 log₂(n!) &#x3D; n log₂ n − 1.44n ≈ n log₂ n。<br>→ 归并&#x2F;快排&#x2F;堆排的 O(n log n) 就是<strong>理论最优</strong>（常数内）。</p>
+<blockquote>
+<p>例：n&#x3D;8 → 至少 ⌈log₂ 8!⌉ &#x3D; ⌈15.3⌉ &#x3D; <strong>16</strong> 次比较。</p>
+</blockquote>
+<h3 id="结论-2：趟数-比较次数速记"><a href="#结论-2：趟数-比较次数速记" class="headerlink" title="结论 2：趟数 &#x2F; 比较次数速记"></a>结论 2：趟数 &#x2F; 比较次数速记</h3><table>
+<thead>
+<tr>
+<th>排序</th>
+<th>趟数</th>
+<th>最坏比较次数</th>
+<th>平均比较次数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>冒泡</td>
+<td>≤ n−1</td>
+<td>n(n−1)&#x2F;2</td>
+<td>n(n−1)&#x2F;2</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>n−1</td>
+<td>n(n−1)&#x2F;2</td>
+<td>n²&#x2F;4</td>
+</tr>
+<tr>
+<td>选择</td>
+<td>n−1</td>
+<td>n(n−1)&#x2F;2</td>
+<td>n(n−1)&#x2F;2</td>
+</tr>
+<tr>
+<td>快排</td>
+<td>递归树高度</td>
+<td>n(n−1)&#x2F;2（基本有序）</td>
+<td>≈ 1.39n log n</td>
+</tr>
+<tr>
+<td>归并</td>
+<td>log n 层</td>
+<td>n log n</td>
+<td>n log n</td>
+</tr>
+<tr>
+<td>堆排</td>
+<td>n−1</td>
+<td>n log n</td>
+<td>n log n</td>
+</tr>
+</tbody></table>
+<h3 id="结论-3：稳定排序-插、冒、归、基（口诀「插冒归基」）"><a href="#结论-3：稳定排序-插、冒、归、基（口诀「插冒归基」）" class="headerlink" title="结论 3：稳定排序 &#x3D; 插、冒、归、基（口诀「插冒归基」）"></a>结论 3：稳定排序 &#x3D; 插、冒、归、基（口诀「插冒归基」）</h3><h3 id="结论-4：已基本有序-→-插入排序最优（O-n-）；内存不够-→-外部归并"><a href="#结论-4：已基本有序-→-插入排序最优（O-n-）；内存不够-→-外部归并" class="headerlink" title="结论 4：已基本有序 → 插入排序最优（O(n)）；内存不够 → 外部归并"></a>结论 4：已基本有序 → 插入排序最优（O(n)）；内存不够 → 外部归并</h3><hr>
+<h2 id="十四、递推公式速记（汉诺塔-斐波那契）"><a href="#十四、递推公式速记（汉诺塔-斐波那契）" class="headerlink" title="十四、递推公式速记（汉诺塔 &#x2F; 斐波那契）"></a>十四、递推公式速记（汉诺塔 &#x2F; 斐波那契）</h2><table>
+<thead>
+<tr>
+<th>递推</th>
+<th>结果</th>
+<th>推导要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>汉诺塔 T(n) &#x3D; 2T(n−1) + 1</td>
+<td><strong>2^n − 1</strong></td>
+<td>先把 n−1 盘移走 + 移大盘 + 再移回</td>
+</tr>
+<tr>
+<td>斐波那契 递归</td>
+<td>O(2^n)</td>
+<td>T(n)&#x3D;T(n−1)+T(n−2)，指数爆炸</td>
+</tr>
+<tr>
+<td>斐波那契 迭代&#x2F;矩阵</td>
+<td>O(n) &#x2F; O(log n)</td>
+<td>滚动变量；矩阵快速幂</td>
+</tr>
+<tr>
+<td>AVL 最少结点（第五节）</td>
+<td>Fib(h+2) − 1</td>
+<td>N(h)&#x3D;N(h−1)+N(h−2)+1</td>
+</tr>
+<tr>
+<td>归并 T(n)&#x3D;2T(n&#x2F;2)+O(n)</td>
+<td>O(n log n)</td>
+<td>每层 O(n)，log n 层</td>
+</tr>
+<tr>
+<td>二分 T(n)&#x3D;T(n&#x2F;2)+O(1)</td>
+<td>O(log n)</td>
+<td>每次折半</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="十五、易混易错对照表"><a href="#十五、易混易错对照表" class="headerlink" title="十五、易混易错对照表"></a>十五、易混易错对照表</h2><table>
+<thead>
+<tr>
+<th>易混点</th>
+<th>正确答案</th>
+<th>错误答案（避坑）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n 个结点树边数</td>
+<td>n−1</td>
+<td>n</td>
+</tr>
+<tr>
+<td>二叉树叶子与度为2</td>
+<td>n₀ &#x3D; n₂ + 1</td>
+<td>n₀ &#x3D; n₂</td>
+</tr>
+<tr>
+<td>完全二叉树叶子</td>
+<td>⌈n&#x2F;2⌉</td>
+<td>⌊n&#x2F;2⌋（相差在 n 为奇时）</td>
+</tr>
+<tr>
+<td>完全二叉树 n₁</td>
+<td>奇→0，偶→1</td>
+<td>恒为 0</td>
+</tr>
+<tr>
+<td>二叉链表空域</td>
+<td>n+1</td>
+<td>2n</td>
+</tr>
+<tr>
+<td>三叉链表空域</td>
+<td>n+2</td>
+<td>n+1</td>
+</tr>
+<tr>
+<td>恰好连通最少边</td>
+<td>n−1</td>
+<td>C(n−1,2)+1（那是”保证”）</td>
+</tr>
+<tr>
+<td>保证连通最少边</td>
+<td>C(n−1,2)+1</td>
+<td>n−1（那是”恰好”）</td>
+</tr>
+<tr>
+<td>有向强连通最少边</td>
+<td>n</td>
+<td>n−1</td>
+</tr>
+<tr>
+<td>无向完全图边数</td>
+<td>n(n−1)&#x2F;2</td>
+<td>n(n−1)（那是有向）</td>
+</tr>
+<tr>
+<td>顺序表插入平均移动</td>
+<td>n&#x2F;2</td>
+<td>(n−1)&#x2F;2（那是删除）</td>
+</tr>
+<tr>
+<td>折半查找最多比较</td>
+<td>⌊log₂n⌋+1</td>
+<td>log₂n（差 1，n 非 2 幂时别取整错）</td>
+</tr>
+<tr>
+<td>哈夫曼总结点数</td>
+<td>2n−1</td>
+<td>n（忽略内部结点）</td>
+</tr>
+<tr>
+<td>完全二叉树深度</td>
+<td>⌊log₂n⌋+1</td>
+<td>⌈log₂(n+1)⌉（两者相等，别混）</td>
+</tr>
+<tr>
+<td>比较排序下界</td>
+<td>Ω(n log n)</td>
+<td>O(n log n)（那是上界&#x2F;平均）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="附录：一句话推导精华（考前-5-分钟）"><a href="#附录：一句话推导精华（考前-5-分钟）" class="headerlink" title="附录：一句话推导精华（考前 5 分钟）"></a>附录：一句话推导精华（考前 5 分钟）</h2><ol>
+<li><strong>边数 n−1</strong>：除根外每点一条父边。</li>
+<li><strong>n₀&#x3D;n₂+1</strong>：Σ度 &#x3D; N−1。</li>
+<li><strong>完全二叉树叶子 ⌈n&#x2F;2⌉</strong>：满树叶子最多，去掉下层右半边。</li>
+<li><strong>空链域 n+1</strong>：2n − (n−1)。</li>
+<li><strong>AVL 最少结点</strong>：左高 h−1 + 右高 h−2 + 1 &#x3D; 斐波那契。</li>
+<li><strong>哈夫曼 2n−1</strong>：n−1 次合并。</li>
+<li>**卡特兰 C(2n,n)&#x2F;(n+1)**：左右子树递归拆分。</li>
+<li><strong>握手定理 Σ度&#x3D;2E</strong>：每条边贡献 2。</li>
+<li><strong>保证连通 C(n−1,2)+1</strong>：最坏 n−1 点全连接 + 1 条边。</li>
+<li><strong>顺序表插入 n&#x2F;2、删除 (n−1)&#x2F;2</strong>：等差求和平均。</li>
+<li><strong>折半 ⌊log₂n⌋+1</strong>：判定树高度。</li>
+<li><strong>α &#x3D; n&#x2F;m</strong>：装填因子。</li>
+<li><strong>循环队列 (rear−front+M)%M</strong>。</li>
+<li><strong>对称矩阵 k &#x3D; i(i−1)&#x2F;2 + j</strong>。</li>
+<li><strong>比较排序下界 n log n</strong>：决策树 n! 种排列。</li>
+</ol>
+<hr>
+<p><em>所有数字结论均已用程序验证。考前把「十五、易混易错表」和「附录」过一遍即可。</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://www.yhblog.xyz">杨浩</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://www.yhblog.xyz/2026/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%C2%B7-%E7%AC%94%E8%AF%95%E5%BF%85%E8%80%83%E3%80%8C%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E3%80%8D%E7%BB%93%E8%AE%BA%E4%B8%8E%E6%8E%A8%E5%AF%BC/">https://www.yhblog.xyz/2026/08/22/数据结构-·-笔试必考「数量关系」结论与推导/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.yhblog.xyz" target="_blank">云端漫步</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/img/cover/16683502390332800.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/03/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分布式事务"><img class="cover" src="/img/cover/16638181232987520.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">分布式事务</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">杨浩</div><div class="author-info__description">遨游知识之海</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">16</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/yyhhguo"><i class="fab fa-github"></i><span>关注我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/yyhhguo" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%91%EF%BC%9A%E7%BB%93%E7%82%B9-%E8%BE%B9-%E5%8F%B6%E5%AD%90-%E5%BA%A6%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">一、树：结点 &#x2F; 边 &#x2F; 叶子 &#x2F; 度数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-1%EF%BC%9An-%E4%B8%AA%E7%BB%93%E7%82%B9%E7%9A%84%E6%A0%91%E6%9C%89-n%E2%88%921-%E6%9D%A1%E8%BE%B9"><span class="toc-number">2.1.</span> <span class="toc-text">结论 1：n 个结点的树有 n−1 条边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2%EF%BC%88%E6%9C%80%E6%A0%B8%E5%BF%83%EF%BC%89%EF%BC%9A%E4%BB%BB%E4%BD%95%E4%BA%8C%E5%8F%89%E6%A0%91-n%E2%82%80-n%E2%82%82-1%EF%BC%88%E5%8F%B6%E5%AD%90%E6%95%B0-%E5%BA%A6%E4%B8%BA2%E7%9A%84%E7%BB%93%E7%82%B9%E6%95%B0-1%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">结论 2（最核心）：任何二叉树 n₀ &#x3D; n₂ + 1（叶子数 &#x3D; 度为2的结点数 + 1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-3%EF%BC%88%E6%8E%A8%E5%B9%BF%E5%88%B0-m-%E5%8F%89%E6%A0%91%EF%BC%89%EF%BC%9An%E2%82%80-1-%CE%A3-j%E2%88%921-%C2%B7n%E2%B1%BC%EF%BC%88j-%E2%89%A5-2%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">结论 3（推广到 m 叉树）：n₀ &#x3D; 1 + Σ(j−1)·nⱼ（j ≥ 2）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-4%EF%BC%9A%E5%B7%B2%E7%9F%A5%E5%90%84%E5%BA%A6%E7%BB%93%E7%82%B9%E6%95%B0%E6%B1%82%E5%8F%B6%E5%AD%90-%E6%80%BB%E7%BB%93%E7%82%B9"><span class="toc-number">2.4.</span> <span class="toc-text">结论 4：已知各度结点数求叶子&#x2F;总结点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-5%EF%BC%9A%E6%A3%AE%E6%9E%97%E6%9C%89-t-%E6%A3%B5%E6%A0%91%E3%80%81n-%E4%B8%AA%E7%BB%93%E7%82%B9%EF%BC%8C%E5%88%99%E8%BE%B9%E6%95%B0-n-%E2%88%92-t"><span class="toc-number">2.5.</span> <span class="toc-text">结论 5：森林有 t 棵树、n 个结点，则边数 &#x3D; n − t</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%9A%E5%B1%82-%E6%B7%B1%E5%BA%A6-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91-%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">3.</span> <span class="toc-text">二、二叉树：层 &#x2F; 深度 &#x2F; 完全二叉树 &#x2F; 满二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-1%EF%BC%9A%E7%AC%AC-i-%E5%B1%82%E6%9C%80%E5%A4%9A-2-i%E2%88%921-%E4%B8%AA%E7%BB%93%E7%82%B9"><span class="toc-number">3.1.</span> <span class="toc-text">结论 1：第 i 层最多 2^(i−1) 个结点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2%EF%BC%9A%E6%B7%B1%E5%BA%A6%E4%B8%BA-k-%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%9A-2-k-%E2%88%92-1-%E4%B8%AA%E7%BB%93%E7%82%B9"><span class="toc-number">3.2.</span> <span class="toc-text">结论 2：深度为 k 的二叉树最多 2^k − 1 个结点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-3%EF%BC%9An-%E4%B8%AA%E7%BB%93%E7%82%B9%E7%9A%84%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">3.3.</span> <span class="toc-text">结论 3：n 个结点的二叉树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-4%EF%BC%9A%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%BF%85%E8%80%83%EF%BC%89"><span class="toc-number">3.4.</span> <span class="toc-text">结论 4：完全二叉树（必考）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-5%EF%BC%9A%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E6%B7%B1%E5%BA%A6-k%EF%BC%89"><span class="toc-number">3.5.</span> <span class="toc-text">结论 5：满二叉树（深度 k）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-6%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91-n-%E4%B8%AA%E7%BB%93%E7%82%B9%EF%BC%8C%E6%81%B0%E5%A5%BD%E5%8F%AA%E6%9C%89-n%E2%88%921-%E6%9D%A1%E8%BE%B9%EF%BC%88%E6%89%80%E6%9C%89%E6%A0%91%E9%80%9A%E7%94%A8%EF%BC%89%EF%BC%8C%E4%B8%8D%E5%8F%AF%E8%83%BD%E6%98%AF-n-%E6%9D%A1"><span class="toc-number">3.6.</span> <span class="toc-text">结论 6：二叉树 n 个结点，恰好只有 n−1 条边（所有树通用），不可能是 n 条</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%98%93%E6%B7%B7%E7%82%B9%EF%BC%9A%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E3%80%8C%E5%BA%A6%E3%80%8D-%E5%AD%A9%E5%AD%90%E6%95%B0%EF%BC%88%E2%89%A42%EF%BC%89%EF%BC%9B%E6%99%AE%E9%80%9A%E6%A0%91%E7%9A%84%E3%80%8C%E5%BA%A6%E3%80%8D-%E5%AD%A9%E5%AD%90%E6%95%B0%EF%BC%9B%E5%9B%BE%E8%AE%BA%E9%87%8C%E3%80%8C%E5%BA%A6%E3%80%8D-%E9%82%BB%E6%8E%A5%E8%BE%B9%E6%95%B0%EF%BC%88%E5%90%AB%E7%88%B6%E8%BE%B9%EF%BC%89%E3%80%82%E4%B8%8D%E5%90%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%AB%E6%B7%B7%E7%94%A8%E3%80%82"><span class="toc-number">3.7.</span> <span class="toc-text">易混点：二叉树的「度」&#x3D; 孩子数（≤2）；普通树的「度」&#x3D; 孩子数；图论里「度」&#x3D; 邻接边数（含父边）。不同上下文别混用。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BA%8C%E5%8F%89%E9%93%BE%E8%A1%A8%E7%A9%BA%E6%8C%87%E9%92%88%E5%9F%9F-%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.</span> <span class="toc-text">三、二叉链表空指针域 &#x2F; 线索二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA%EF%BC%9An-%E4%B8%AA%E7%BB%93%E7%82%B9%E7%9A%84%E4%BA%8C%E5%8F%89%E9%93%BE%E8%A1%A8%E6%9C%89-n-1-%E4%B8%AA%E7%A9%BA%E6%8C%87%E9%92%88%E5%9F%9F"><span class="toc-number">4.1.</span> <span class="toc-text">结论：n 个结点的二叉链表有 n+1 个空指针域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E5%B9%BF%EF%BC%9A%E4%B8%89%E5%8F%89%E9%93%BE%E8%A1%A8%EF%BC%88lchild-rchild-parent%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">推广：三叉链表（lchild + rchild + parent）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81AVL-%E6%9C%80%E5%B0%91%E7%BB%93%E7%82%B9%EF%BC%88%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">四、AVL 最少结点（斐波那契）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA%EF%BC%9A%E9%AB%98%E5%BA%A6%E4%B8%BA-h-%E7%9A%84-AVL-%E6%A0%91%E6%9C%80%E5%B0%91%E7%BB%93%E7%82%B9%E6%95%B0%E6%BB%A1%E8%B6%B3"><span class="toc-number">5.1.</span> <span class="toc-text">结论：高度为 h 的 AVL 树最少结点数满足</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91"><span class="toc-number">6.</span> <span class="toc-text">五、哈夫曼树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA%EF%BC%9An-%E4%B8%AA%E5%8F%B6%E5%AD%90%EF%BC%88%E6%9D%83%E5%80%BC%EF%BC%89%E7%9A%84%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E6%9C%89-2n%E2%88%921-%E4%B8%AA%E7%BB%93%E7%82%B9"><span class="toc-number">6.1.</span> <span class="toc-text">结论：n 个叶子（权值）的哈夫曼树有 2n−1 个结点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%80%A7%E8%B4%A8"><span class="toc-number">6.2.</span> <span class="toc-text">其他性质</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0%EF%BC%88%E5%BD%A2%E6%80%81%E6%95%B0-%E5%87%BA%E6%A0%88%E5%BA%8F%E5%88%97-%E6%8B%AC%E5%8F%B7%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">六、卡特兰数（形态数 &#x2F; 出栈序列 &#x2F; 括号）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%EF%BC%9AC%E2%82%99-C-2n-n-n-1"><span class="toc-number">7.1.</span> <span class="toc-text">公式：Cₙ &#x3D; C(2n, n) &#x2F; (n+1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E5%A4%A7%E5%BA%94%E7%94%A8%EF%BC%88%E8%80%83%E5%88%B0%E5%B0%B1%E6%98%AF%E8%BF%99%E5%87%A0%E7%A7%8D%EF%BC%89"><span class="toc-number">7.2.</span> <span class="toc-text">四大应用（考到就是这几种）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%A0%91%E4%B8%8E%E6%A3%AE%E6%9E%97%E8%BD%AC%E6%8D%A2"><span class="toc-number">8.</span> <span class="toc-text">七、树与森林转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%9B%BE%EF%BC%9A%E8%BE%B9%E6%95%B0-%E5%BA%A6%E6%95%B0-%E8%BF%9E%E9%80%9A%E6%80%A7-%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">9.</span> <span class="toc-text">八、图：边数 &#x2F; 度数 &#x2F; 连通性 &#x2F; 生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-1%EF%BC%9A%E6%8F%A1%E6%89%8B%E5%AE%9A%E7%90%86"><span class="toc-number">9.1.</span> <span class="toc-text">结论 1：握手定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2%EF%BC%9A%E5%AE%8C%E5%85%A8%E5%9B%BE%E8%BE%B9%E6%95%B0%EF%BC%88%E5%BF%85%E8%80%83%EF%BC%89"><span class="toc-number">9.2.</span> <span class="toc-text">结论 2：完全图边数（必考）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-3%EF%BC%9A%E8%BF%9E%E9%80%9A%E6%80%A7%E6%9C%80%E5%B0%91%E8%BE%B9%E6%95%B0%EF%BC%88%E9%AB%98%E9%A2%91%E6%98%93%E6%B7%B7%EF%BC%8C%E5%8A%A1%E5%BF%85%E5%88%86%E6%B8%85%EF%BC%89"><span class="toc-number">9.3.</span> <span class="toc-text">结论 3：连通性最少边数（高频易混，务必分清）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-4%EF%BC%9A%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">9.4.</span> <span class="toc-text">结论 4：生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-5%EF%BC%9A%E5%B9%B3%E9%9D%A2%E5%9B%BE%EF%BC%88%E6%AC%A7%E6%8B%89%E5%85%AC%E5%BC%8F%EF%BC%89"><span class="toc-number">9.5.</span> <span class="toc-text">结论 5：平面图（欧拉公式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-6%EF%BC%9A%E6%AC%A7%E6%8B%89%E5%9B%BE"><span class="toc-number">9.6.</span> <span class="toc-text">结论 6：欧拉图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-7%EF%BC%9A%E4%BA%8C%E5%88%86%E5%9B%BE-%E2%9F%BA-%E6%97%A0%E5%A5%87%E7%8E%AF-%E2%9F%BA-2-%E5%8F%AF%E7%9D%80%E8%89%B2"><span class="toc-number">9.7.</span> <span class="toc-text">结论 7：二分图 ⟺ 无奇环 ⟺ 2-可着色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-8%EF%BC%9A%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E6%88%90%E5%8A%9F-%E2%9F%BA-%E6%97%A0%E7%8E%AF%EF%BC%88DAG%EF%BC%89%EF%BC%9B%E5%BA%8F%E5%88%97%E5%94%AF%E4%B8%80-%E2%9F%BA-%E6%AF%8F%E6%AD%A5%E5%85%A5%E5%BA%A6%E4%B8%BA-0-%E7%9A%84%E9%A1%B6%E7%82%B9%E6%81%B0%E4%B8%80%E4%B8%AA"><span class="toc-number">9.8.</span> <span class="toc-text">结论 8：拓扑排序成功 ⟺ 无环（DAG）；序列唯一 ⟺ 每步入度为 0 的顶点恰一个</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E7%BA%BF%E6%80%A7%E8%A1%A8%EF%BC%9A%E5%B9%B3%E5%9D%87%E7%A7%BB%E5%8A%A8-%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0"><span class="toc-number">10.</span> <span class="toc-text">九、线性表：平均移动 &#x2F; 比较次数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-1%EF%BC%9A%E9%A1%BA%E5%BA%8F%E8%A1%A8%E6%8F%92%E5%85%A5-%E5%88%A0%E9%99%A4%E5%B9%B3%E5%9D%87%E7%A7%BB%E5%8A%A8%E6%AC%A1%E6%95%B0%EF%BC%88%E9%AB%98%E9%A2%91%EF%BC%81%EF%BC%89"><span class="toc-number">10.1.</span> <span class="toc-text">结论 1：顺序表插入&#x2F;删除平均移动次数（高频！）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2%EF%BC%9A%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5-%E5%88%A0%E9%99%A4"><span class="toc-number">10.2.</span> <span class="toc-text">结论 2：链表插入&#x2F;删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E6%9F%A5%E6%89%BE%EF%BC%9A%E9%A1%BA%E5%BA%8F-%E6%8A%98%E5%8D%8A-%E5%93%88%E5%B8%8C%E8%A3%85%E5%A1%AB%E5%9B%A0%E5%AD%90"><span class="toc-number">11.</span> <span class="toc-text">十、查找：顺序 &#x2F; 折半 &#x2F; 哈希装填因子</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-1%EF%BC%9A%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE"><span class="toc-number">11.1.</span> <span class="toc-text">结论 1：顺序查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2%EF%BC%9A%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%EF%BC%88%E5%9F%BA%E4%BA%8E%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%EF%BC%89"><span class="toc-number">11.2.</span> <span class="toc-text">结论 2：折半查找（基于有序数组）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-3%EF%BC%9A%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="toc-number">11.3.</span> <span class="toc-text">结论 3：哈希表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%80%E3%80%81%E6%A0%88-%E9%98%9F%E5%88%97-%E4%B8%B2-%E5%B9%BF%E4%B9%89%E8%A1%A8"><span class="toc-number">12.</span> <span class="toc-text">十一、栈 &#x2F; 队列 &#x2F; 串 &#x2F; 广义表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88"><span class="toc-number">12.1.</span> <span class="toc-text">栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%9F%E5%88%97%EF%BC%88%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%EF%BC%8C%E5%AE%B9%E9%87%8F-M%EF%BC%8C%E5%A4%B4-front-%E5%B0%BE-rear%EF%BC%89"><span class="toc-number">12.2.</span> <span class="toc-text">队列（循环队列，容量 M，头 front 尾 rear）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2"><span class="toc-number">12.3.</span> <span class="toc-text">串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BF%E4%B9%89%E8%A1%A8"><span class="toc-number">12.4.</span> <span class="toc-text">广义表</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%8C%E3%80%81%E7%9F%A9%E9%98%B5%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97%EF%BC%88%E5%A1%AB%E7%A9%BA%E5%BF%85%E8%80%83%EF%BC%89"><span class="toc-number">13.</span> <span class="toc-text">十二、矩阵压缩存储地址计算（填空必考）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5-A-1-n-1-n-%E8%A1%8C%E4%BC%98%E5%85%88%E5%8E%8B%E7%BC%A9%E5%AD%98%E4%B8%80%E7%BB%B4-B"><span class="toc-number">13.1.</span> <span class="toc-text">对称矩阵 A[1..n][1..n] 行优先压缩存一维 B</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5"><span class="toc-number">13.2.</span> <span class="toc-text">三角矩阵</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5%EF%BC%88%E5%B8%A6%E5%AE%BD-1%EF%BC%89"><span class="toc-number">13.3.</span> <span class="toc-text">三对角矩阵（带宽 1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="toc-number">13.4.</span> <span class="toc-text">稀疏矩阵</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%B8%89%E3%80%81%E6%8E%92%E5%BA%8F%EF%BC%9A%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0%E4%B8%8B%E7%95%8C-%E8%B6%9F%E6%95%B0"><span class="toc-number">14.</span> <span class="toc-text">十三、排序：比较次数下界 &#x2F; 趟数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-1%EF%BC%9A%E6%AF%94%E8%BE%83%E6%8E%92%E5%BA%8F%E4%B8%8B%E7%95%8C-%CE%A9-n-log-n"><span class="toc-number">14.1.</span> <span class="toc-text">结论 1：比较排序下界 Ω(n log n)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2%EF%BC%9A%E8%B6%9F%E6%95%B0-%E6%AF%94%E8%BE%83%E6%AC%A1%E6%95%B0%E9%80%9F%E8%AE%B0"><span class="toc-number">14.2.</span> <span class="toc-text">结论 2：趟数 &#x2F; 比较次数速记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-3%EF%BC%9A%E7%A8%B3%E5%AE%9A%E6%8E%92%E5%BA%8F-%E6%8F%92%E3%80%81%E5%86%92%E3%80%81%E5%BD%92%E3%80%81%E5%9F%BA%EF%BC%88%E5%8F%A3%E8%AF%80%E3%80%8C%E6%8F%92%E5%86%92%E5%BD%92%E5%9F%BA%E3%80%8D%EF%BC%89"><span class="toc-number">14.3.</span> <span class="toc-text">结论 3：稳定排序 &#x3D; 插、冒、归、基（口诀「插冒归基」）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-4%EF%BC%9A%E5%B7%B2%E5%9F%BA%E6%9C%AC%E6%9C%89%E5%BA%8F-%E2%86%92-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%E6%9C%80%E4%BC%98%EF%BC%88O-n-%EF%BC%89%EF%BC%9B%E5%86%85%E5%AD%98%E4%B8%8D%E5%A4%9F-%E2%86%92-%E5%A4%96%E9%83%A8%E5%BD%92%E5%B9%B6"><span class="toc-number">14.4.</span> <span class="toc-text">结论 4：已基本有序 → 插入排序最优（O(n)）；内存不够 → 外部归并</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E5%9B%9B%E3%80%81%E9%80%92%E6%8E%A8%E5%85%AC%E5%BC%8F%E9%80%9F%E8%AE%B0%EF%BC%88%E6%B1%89%E8%AF%BA%E5%A1%94-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%EF%BC%89"><span class="toc-number">15.</span> <span class="toc-text">十四、递推公式速记（汉诺塔 &#x2F; 斐波那契）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E4%BA%94%E3%80%81%E6%98%93%E6%B7%B7%E6%98%93%E9%94%99%E5%AF%B9%E7%85%A7%E8%A1%A8"><span class="toc-number">16.</span> <span class="toc-text">十五、易混易错对照表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%8E%A8%E5%AF%BC%E7%B2%BE%E5%8D%8E%EF%BC%88%E8%80%83%E5%89%8D-5-%E5%88%86%E9%92%9F%EF%BC%89"><span class="toc-number">17.</span> <span class="toc-text">附录：一句话推导精华（考前 5 分钟）</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%C2%B7-%E7%AC%94%E8%AF%95%E5%BF%85%E8%80%83%E3%80%8C%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E3%80%8D%E7%BB%93%E8%AE%BA%E4%B8%8E%E6%8E%A8%E5%AF%BC/" title="数据结构 · 笔试必考「数量关系」结论与推导"><img src="/img/cover/16683502390332800.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据结构 · 笔试必考「数量关系」结论与推导"/></a><div class="content"><a class="title" href="/2026/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%C2%B7-%E7%AC%94%E8%AF%95%E5%BF%85%E8%80%83%E3%80%8C%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E3%80%8D%E7%BB%93%E8%AE%BA%E4%B8%8E%E6%8E%A8%E5%AF%BC/" title="数据结构 · 笔试必考「数量关系」结论与推导">数据结构 · 笔试必考「数量关系」结论与推导</a><time datetime="2026-08-22T09:33:59.000Z" title="发表于 2026-08-22 17:33:59">2026-08-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/03/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分布式事务"><img src="/img/cover/16638181232987520.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分布式事务"/></a><div class="content"><a class="title" href="/2024/09/03/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" title="分布式事务">分布式事务</a><time datetime="2024-09-03T12:54:09.000Z" title="发表于 2024-09-03 20:54:09">2024-09-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/05/MQ%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" title="MQ常见问题总结"><img src="/img/cover/16672376185015680.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MQ常见问题总结"/></a><div class="content"><a class="title" href="/2024/08/05/MQ%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" title="MQ常见问题总结">MQ常见问题总结</a><time datetime="2024-08-05T13:18:24.000Z" title="发表于 2024-08-05 21:18:24">2024-08-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%AD%E7%9A%84redis/" title="微服务中的redis"><img src="/img/cover/16517914361384320.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="微服务中的redis"/></a><div class="content"><a class="title" href="/2024/08/04/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%AD%E7%9A%84redis/" title="微服务中的redis">微服务中的redis</a><time datetime="2024-08-04T05:14:15.000Z" title="发表于 2024-08-04 13:14:15">2024-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/02/redis%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/" title="redis缓存问题"><img src="/img/cover/15556743616106816.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="redis缓存问题"/></a><div class="content"><a class="title" href="/2024/08/02/redis%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98/" title="redis缓存问题">redis缓存问题</a><time datetime="2024-08-02T09:18:23.000Z" title="发表于 2024-08-02 17:18:23">2024-08-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By 杨浩</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="false" data-text="Welcome,my,Blog" data-fontsize="23px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
