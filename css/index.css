@@ -2408,6 +2408,243 @@ figure.highlight pre .javascript .function {
   font-weight: bold;
   font-size: 1.5em;
 }
+#home-cats {
+  margin-bottom: 6px;
+}
+.home-cats-head {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: baseline;
+  -moz-box-align: baseline;
+  -o-box-align: baseline;
+  -ms-flex-align: baseline;
+  -webkit-align-items: baseline;
+  align-items: baseline;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-bottom: 14px;
+}
+.home-cats-title {
+  position: relative;
+  margin: 0;
+  padding-left: 11px;
+  color: var(--text-highlight-color);
+  font-size: 1.35rem;
+  line-height: 1.5;
+}
+.home-cats-title:before {
+  position: absolute;
+  top: 0.2em;
+  bottom: 0.2em;
+  left: 0;
+  width: 4px;
+  border-radius: 3px;
+  background: #49b1f5;
+  content: '';
+}
+.home-cats-sub {
+  color: var(--font-color);
+  font-size: 0.82rem;
+  opacity: 0.55;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=55)";
+  filter: alpha(opacity=55);
+}
+.home-cats-grid {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.home-cat-card {
+  position: relative;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 240px;
+  -ms-flex: 1 1 240px;
+  flex: 1 1 240px;
+  min-width: 0;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--card-bg);
+  -webkit-box-shadow: var(--card-box-shadow);
+  box-shadow: var(--card-box-shadow);
+  -webkit-transition: box-shadow 0.3s ease;
+  -moz-transition: box-shadow 0.3s ease;
+  -o-transition: box-shadow 0.3s ease;
+  -ms-transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
+}
+.home-cat-card:hover {
+  -webkit-box-shadow: var(--card-hover-box-shadow);
+  box-shadow: var(--card-hover-box-shadow);
+}
+.home-cat-card:hover .home-cat-cover-img {
+  -webkit-transform: scale(1.08);
+  -moz-transform: scale(1.08);
+  -o-transform: scale(1.08);
+  -ms-transform: scale(1.08);
+  transform: scale(1.08);
+}
+.home-cat-card:hover .home-cat-arrow {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -o-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+}
+.home-cat-card:focus-visible {
+  outline: 2px solid #49b1f5;
+  outline-offset: 2px;
+}
+.home-cat-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  background: -webkit-linear-gradient(315deg, #49b1f5 0%, #66bdf7 100%);
+  background: -moz-linear-gradient(315deg, #49b1f5 0%, #66bdf7 100%);
+  background: -o-linear-gradient(315deg, #49b1f5 0%, #66bdf7 100%);
+  background: -ms-linear-gradient(315deg, #49b1f5 0%, #66bdf7 100%);
+  background: linear-gradient(135deg, #49b1f5 0%, #66bdf7 100%);
+}
+.home-cat-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-transition: -webkit-transform 0.6s;
+  -moz-transition: -moz-transform 0.6s;
+  -o-transition: -o-transform 0.6s;
+  -ms-transition: -ms-transform 0.6s;
+  transition: transform 0.6s;
+}
+.home-cat-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: -webkit-linear-gradient(270deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.38) 45%, rgba(0,0,0,0.8) 100%);
+  background: -moz-linear-gradient(270deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.38) 45%, rgba(0,0,0,0.8) 100%);
+  background: -o-linear-gradient(270deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.38) 45%, rgba(0,0,0,0.8) 100%);
+  background: -ms-linear-gradient(270deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.38) 45%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.38) 45%, rgba(0,0,0,0.8) 100%);
+}
+.home-cat-info {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  padding: 12px 14px;
+  color: #fff;
+}
+.home-cat-name {
+  margin: 0 0 4px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.home-cat-meta {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.home-cat-meta i {
+  margin-right: 4px;
+}
+.home-cat-arrow {
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-transform: translateX(-4px);
+  -moz-transform: translateX(-4px);
+  -o-transform: translateX(-4px);
+  -ms-transform: translateX(-4px);
+  transform: translateX(-4px);
+}
+.home-cat-latest {
+  margin-top: 3px;
+  overflow: hidden;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media screen and (max-width: 600px) {
+  .home-cats-grid {
+    gap: 12px;
+  }
+  .home-cat-card {
+    -webkit-flex-basis: 100%;
+    flex-basis: 100%;
+    height: 150px;
+  }
+}
 #recent-posts > .recent-post-item:not(:first-child) {
   margin-top: 20px;
 }

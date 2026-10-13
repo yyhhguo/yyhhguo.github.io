@@ -20,13 +20,13 @@
       
         <tags>
             
-            <tag> Transformer </tag>
-            
-            <tag> 注意力机制 </tag>
-            
             <tag> 大模型 </tag>
             
             <tag> LLM </tag>
+            
+            <tag> Transformer </tag>
+            
+            <tag> 注意力机制 </tag>
             
         </tags>
       
@@ -51,15 +51,15 @@
       
         <tags>
             
-            <tag> 大模型 </tag>
-            
-            <tag> LLM </tag>
-            
             <tag> RAG </tag>
+            
+            <tag> 大模型 </tag>
             
             <tag> 向量数据库 </tag>
             
             <tag> Milvus </tag>
+            
+            <tag> LLM </tag>
             
         </tags>
       
